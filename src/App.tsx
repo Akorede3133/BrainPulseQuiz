@@ -1,8 +1,10 @@
-function App() {
+import Quiz from "./components/Quiz";
 
+const App = () => {
   return (
-    <>
-    </>
+    <div>
+      <Quiz />
+    </div>
   )
 }
 
