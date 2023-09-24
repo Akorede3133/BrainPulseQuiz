@@ -5,13 +5,14 @@ function decodeHtmlEntities(input: string) {
   return doc.documentElement.textContent;
 }
 const Quiz = () => {
-  const { questions } = useAppSelector((state) => state.quiz);
-  console.log(questions);
+  const { questionsWithId } = useAppSelector((state) => state.quiz);
+  console.log(questionsWithId);
+  
   return (
     <div className="w-[95%] md:w-[700px] py-5 mx-auto min-h-screen bg-center bg-cover bg-no-repeat">
       <ul className=" text-white px-4 min-h-[90vh] grid place-content-start gap-4">
         {
-          questions.map((quest) => {
+          questionsWithId.map((quest) => {
             const {question, correct_answer, incorrect_answers } = quest;
             const options = [correct_answer, ...incorrect_answers].sort(() => Math.random() - 0.5)
             return (

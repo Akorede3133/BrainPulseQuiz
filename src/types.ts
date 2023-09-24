@@ -5,6 +5,7 @@ export interface QuestionProp {
 }
 export interface InitialStateProp {
   questions: QuestionProp[];
+  questionsWithId:  QuestionProp[];
   loading: boolean;
   error: string | undefined;
 }

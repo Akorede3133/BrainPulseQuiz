@@ -1,8 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { InitialStateProp, QuizResponseProp } from "../../types";
 const initialState: InitialStateProp = {
   questions: [],
+  questionsWithId: [],
   loading: true,
   error: '',
 };
@@ -21,7 +22,14 @@ export const getQuestions = createAsyncThunk('quiz/getQuestions', async () => {
 export const quizeSlice = createSlice({
   name: 'quiz',
   initialState,
-  reducers: {},
+  reducers: {
+    createQuestionsWithId: (state) =>  {
+      const questionsWithId = state.questions.map((question) => {
+        return {id: nanoid(), ...question}
+      })
+      state.questionsWithId = questionsWithId;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getQuestions.pending, (state) => {
@@ -39,5 +47,5 @@ export const quizeSlice = createSlice({
   }
 })
 
-
+export const { createQuestionsWithId } = quizeSlice.actions;
 export default quizeSlice.reducer

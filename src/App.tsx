@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from './app/hook';
 import { getQuestions } from './features/quiz/quizSlice';
+import { createQuestionsWithId } from './features/quiz/quizSlice';
 import Quiz from "./components/Quiz";
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
   const dispatch = useAppDispatch();  
   useEffect(() => {
     dispatch(getQuestions());
+    dispatch(createQuestionsWithId());
   }, [dispatch])
   return (
     <div className=" bg-gradient-to-r from-purple-900 to-pink-900">
