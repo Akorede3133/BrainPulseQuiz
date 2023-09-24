@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { InitialStateProp } from "../../types";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { InitialStateProp, QuizResponseProp } from "../../types";
 const initialState: InitialStateProp = {
   questions: [],
   loading: true,
@@ -19,7 +20,22 @@ export const getQuestions = createAsyncThunk('quiz/getQuestions', async () => {
 export const quizeSlice = createSlice({
   name: 'quiz',
   initialState,
-  reducers: {}
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(getQuestions.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getQuestions.fulfilled, (state, action: PayloadAction<QuizResponseProp>) => {
+        state.loading = false;
+        const { results } = action.payload;
+        state.questions = results;
+      })
+      .addCase(getQuestions.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+  }
 })
 
 

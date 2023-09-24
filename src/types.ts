@@ -6,5 +6,9 @@ export interface QuestionProp {
 export interface InitialStateProp {
   questions: QuestionProp[];
   loading: boolean;
-  error: string;
+  error: string | undefined;
+}
+export interface QuizResponseProp {
+  response_code: number;
+  results: QuestionProp[];
 }
