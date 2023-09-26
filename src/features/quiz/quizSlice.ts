@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { InitialStateProp, QuizResponseProp } from "../../types";
 const initialState: InitialStateProp = {
   questions: [],
+  correctCount: 0,
   questionsWithId: [],
   loading: true,
   error: '',
@@ -29,6 +30,15 @@ export const quizeSlice = createSlice({
       if (question) {
         question.selected = value;
       }
+    },
+    countCorrectAnswers: (state, action) => {      
+      const {correct_answer, selected} = action.payload;
+      if (correct_answer === selected) {
+        state.correctCount++;
+      }
+      if (correct_answer !== selected && state.correctCount !== 0) {
+        state.correctCount--;
+      }
     }
   },
   extraReducers: (builder) => {
@@ -42,7 +52,7 @@ export const quizeSlice = createSlice({
         const questionsWithId = results.map((quest) => {
           const { correct_answer, incorrect_answers, question } = quest
           const options = [correct_answer, ...incorrect_answers].sort(() => Math.random() - 0.5)
-          return {id: nanoid(), question, correct_answer, incorrect_answers, options}
+          return {id: nanoid(), question, correct_answer, incorrect_answers, options, selected: ''}
         })
         state.questions = questionsWithId;
       })
@@ -52,5 +62,5 @@ export const quizeSlice = createSlice({
       })
   }
 })
-export const { selectAnswer } = quizeSlice.actions;
+export const { selectAnswer, countCorrectAnswers } = quizeSlice.actions;
 export default quizeSlice.reducer

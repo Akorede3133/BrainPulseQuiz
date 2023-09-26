@@ -1,13 +1,14 @@
 export interface QuestionProp {
-  id?: string
+  id: string
   question: string;
   correct_answer: string;
   options: string[];
   incorrect_answers: string[];
-  selected?: string
+  selected: string
 }
 export interface InitialStateProp {
   questions: QuestionProp[];
+  correctCount: number;
   questionsWithId:  QuestionProp[];
   loading: boolean;
   error: string | undefined;
