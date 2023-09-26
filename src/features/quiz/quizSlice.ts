@@ -22,7 +22,15 @@ export const getQuestions = createAsyncThunk('quiz/getQuestions', async () => {
 export const quizeSlice = createSlice({
   name: 'quiz',
   initialState,
-  reducers: {},
+  reducers: {
+    selectAnswer: (state, action) => {
+      const { id, value } = action.payload;
+      const question = state.questions.find((question) => question.id === id);
+      if (question) {
+        question.selected = value;
+      }
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getQuestions.pending, (state) => {
@@ -33,7 +41,8 @@ export const quizeSlice = createSlice({
         const { results } = action.payload;
         const questionsWithId = results.map((quest) => {
           const { correct_answer, incorrect_answers, question } = quest
-          return {id: nanoid(), question, correct_answer, incorrect_answers}
+          const options = [correct_answer, ...incorrect_answers].sort(() => Math.random() - 0.5)
+          return {id: nanoid(), question, correct_answer, incorrect_answers, options}
         })
         state.questions = questionsWithId;
       })
@@ -43,5 +52,5 @@ export const quizeSlice = createSlice({
       })
   }
 })
-
+export const { selectAnswer } = quizeSlice.actions;
 export default quizeSlice.reducer

@@ -2,6 +2,7 @@ export interface QuestionProp {
   id?: string
   question: string;
   correct_answer: string;
+  options: string[];
   incorrect_answers: string[];
   selected?: string
 }
