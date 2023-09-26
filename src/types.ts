@@ -1,7 +1,9 @@
 export interface QuestionProp {
+  id?: string
   question: string;
   correct_answer: string;
   incorrect_answers: string[];
+  selected?: string
 }
 export interface InitialStateProp {
   questions: QuestionProp[];

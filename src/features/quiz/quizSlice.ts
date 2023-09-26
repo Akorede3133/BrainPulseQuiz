@@ -31,8 +31,9 @@ export const quizeSlice = createSlice({
       .addCase(getQuestions.fulfilled, (state, action: PayloadAction<QuizResponseProp>) => {
         state.loading = false;
         const { results } = action.payload;
-        const questionsWithId = results.map((question) => {
-          return {id: nanoid(), ...question}
+        const questionsWithId = results.map((quest) => {
+          const { correct_answer, incorrect_answers, question } = quest
+          return {id: nanoid(), question, correct_answer, incorrect_answers}
         })
         state.questions = questionsWithId;
       })

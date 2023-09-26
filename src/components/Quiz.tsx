@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useAppSelector, useAppDispatch } from '../app/hook';
+import { useAppSelector } from '../app/hook';
 function decodeHtmlEntities(input: string) {
   const doc = new DOMParser().parseFromString(input, "text/html");
   return doc.documentElement.textContent;
@@ -15,7 +14,7 @@ const Quiz = () => {
             const {question, correct_answer, incorrect_answers } = quest;
             const options = [correct_answer, ...incorrect_answers].sort(() => Math.random() - 0.5)
             return (
-              <li className=" border-b border-b-pink-700 pb-5">
+              <li key={} className=" border-b border-b-pink-700 pb-5">
                 <p className=" pb-4 text-2xl">{decodeHtmlEntities(question)}</p>
                 <ul className=" flex flex-wrap gap-4">
                   {
