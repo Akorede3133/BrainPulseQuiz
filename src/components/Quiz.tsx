@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../app/hook';
 import { selectAnswer, countCorrectAnswers } from '../features/quiz/quizSlice';
 function decodeHtmlEntities(input: string) {
@@ -5,11 +6,17 @@ function decodeHtmlEntities(input: string) {
   return doc.documentElement.textContent;
 }
 const Quiz = () => {
-  const { questions } = useAppSelector((state) => state.quiz);  
+  const { questions, correctCount } = useAppSelector((state) => state.quiz);  
+  console.log(questions, correctCount);
+  
+  const [checkAnswer, setCheckAnswer] = useState<boolean>(false)
   const dispatch = useAppDispatch();
-  const handleChoseOption = (id: string, value: string, correct_answer: string, selected: string) => {    
+  const handleChoseOption = (id: string, value: string) => {    
     dispatch(selectAnswer({id, value}));
-    dispatch(countCorrectAnswers({correct_answer, selected}))
+  }
+  const handleCheckAnswer = () => {
+    setCheckAnswer(true)
+    dispatch(countCorrectAnswers());
   }
   
   return (
@@ -24,17 +31,31 @@ const Quiz = () => {
                 <p className=" pb-4 text-2xl">{decodeHtmlEntities(question)}</p>
                 <ul className=" flex flex-wrap gap-4">
                   {
+                    checkAnswer ?
                     options.map((option, index) => {
                       const decodedOption = decodeHtmlEntities(option);
                       if (decodedOption) {
                         return (
-                          <li key={index} onClick={()=> dispatch(() => handleChoseOption(id, decodedOption, correct_answer, option))}>
+                          <li key={index} onClick={()=> dispatch(() => handleChoseOption(id, decodedOption))}>
+                            <button className={`${correct_answer === option && 'bg-green-500'} ${selected === option && 'bg-pink-500'} text-sm cursor-pointer hover:bg-pink-600 border hover:border-0 border-pink-700 rounded-md px-4 py-1`}>{decodedOption}</button>
+                          </li>
+                        )
+                      }
+                   
+                    })
+                    :
+                    options.map((option, index) => {
+                      const decodedOption = decodeHtmlEntities(option);
+                      if (decodedOption) {
+                        return (
+                          <li key={index} onClick={()=> dispatch(() => handleChoseOption(id, decodedOption))}>
                             <button className={`${selected === option && 'bg-pink-500'} text-sm cursor-pointer hover:bg-pink-600 border hover:border-0 border-pink-700 rounded-md px-4 py-1`}>{decodedOption}</button>
                           </li>
                         )
                       }
                    
                     })
+                    
                   }
                 </ul>
               </li>
@@ -43,7 +64,7 @@ const Quiz = () => {
         }
       </ul>
       <div className="flex justify-center mt-10">
-      <button className='bg-pink-500 px-8 py-2 rounded-md text-white hover:bg-transparent hover:border border-pink-500 hover:scale-105 transition-all capitalize'>check answers</button>
+      <button className='bg-pink-500 px-8 py-2 rounded-md text-white hover:bg-transparent hover:border border-pink-500 hover:scale-105 transition-all capitalize' onClick={handleCheckAnswer}>check answers</button>
       </div>
     </div>
   )

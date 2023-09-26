@@ -31,14 +31,14 @@ export const quizeSlice = createSlice({
         question.selected = value;
       }
     },
-    countCorrectAnswers: (state, action) => {      
-      const {correct_answer, selected} = action.payload;
-      if (correct_answer === selected) {
-        state.correctCount++;
-      }
-      if (correct_answer !== selected && state.correctCount !== 0) {
-        state.correctCount--;
-      }
+    countCorrectAnswers: (state) => {      
+      const count = state.questions.reduce((acc, item) => {
+        if (item.correct_answer === item.selected) {
+          acc += 1;
+        }
+        return acc;
+      }, 0)
+      state.correctCount = count;
     }
   },
   extraReducers: (builder) => {
