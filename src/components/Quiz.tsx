@@ -11,14 +11,14 @@ const Quiz = () => {
       <ul className=" text-white px-4 min-h-[90vh] grid place-content-start gap-4">
         {
           questions.map((quest) => {
-            const {question, correct_answer, incorrect_answers } = quest;
+            const {question, correct_answer, incorrect_answers, id } = quest;
             const options = [correct_answer, ...incorrect_answers].sort(() => Math.random() - 0.5)
             return (
-              <li key={} className=" border-b border-b-pink-700 pb-5">
+              <li key={id} className=" border-b border-b-pink-700 pb-5">
                 <p className=" pb-4 text-2xl">{decodeHtmlEntities(question)}</p>
                 <ul className=" flex flex-wrap gap-4">
                   {
-                    options.map((option) => <li className="">
+                    options.map((option, index) => <li className="" key={index}>
                       <button className="text-sm cursor-pointer hover:bg-pink-600 border hover:border-0 border-pink-700 rounded-md px-4 py-1">{decodeHtmlEntities(option)}</button>
                       </li>)
                   }
