@@ -10,14 +10,16 @@ const SingleOption = ({index, id, option, selected, correct_answer, checkAnswer}
   }
   const decodedOption = decodeHtmlEntities(option);
   const decodedCorrrectAnswer = decodeHtmlEntities(correct_answer)                      
-
+  console.log(checkAnswer);
+  
   return (
-    <li key={index} onClick={()=> dispatch(() => handleChoseOption(id, decodedOption))}>
+    <li key={index} >
       <button 
         className={`
-        ${selected === decodedOption && 'bg-pink-400'}
-        ${decodedCorrrectAnswer === decodedOption && 'bg-green-300 border-green-300'} 
-        ${selected === decodedOption && selected === decodedCorrrectAnswer && 'bg-green-300 border-green-300'}
+        ${!checkAnswer && selected === decodedOption && 'bg-pink-400'}
+        ${checkAnswer && selected === decodedOption && 'bg-red-600'}
+        ${decodedCorrrectAnswer === decodedOption && 'bg-green-600 border-green-600'} 
+        ${selected === decodedOption && selected === decodedCorrrectAnswer && 'bg-green-600 border-green-600'}
         ${checkAnswer && 'pointer-events-none'} 
         text-sm cursor-pointer 
         hover:bg-pink-600 
@@ -26,6 +28,7 @@ const SingleOption = ({index, id, option, selected, correct_answer, checkAnswer}
         border-pink-700 
         rounded-md px-4 py-1`}
         disabled={checkAnswer}
+        onClick={()=> dispatch(() => handleChoseOption(id, decodedOption))}
       >
       {decodedOption}
       </button>
