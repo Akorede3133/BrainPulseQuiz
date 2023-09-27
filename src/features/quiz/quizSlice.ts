@@ -39,6 +39,9 @@ export const quizeSlice = createSlice({
         return acc;
       }, 0)
       state.correctCount = count;
+    },
+    playAgain: (state) => {
+      state.correctCount = 0;
     }
   },
   extraReducers: (builder) => {
@@ -62,5 +65,5 @@ export const quizeSlice = createSlice({
       })
   }
 })
-export const { selectAnswer, countCorrectAnswers } = quizeSlice.actions;
+export const { selectAnswer, countCorrectAnswers, playAgain } = quizeSlice.actions;
 export default quizeSlice.reducer

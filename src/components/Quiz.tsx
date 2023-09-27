@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../app/hook';
-import { countCorrectAnswers } from '../features/quiz/quizSlice';
+import { useAppDispatch } from '../app/hook';
+import { getQuestions } from '../features/quiz/quizSlice';
+import { countCorrectAnswers, playAgain } from '../features/quiz/quizSlice';
 import QuizQuestions from './QuizQuestions';
 import ScoreBoard from './ScoreBoard';
 import Buttons from './Buttons';
@@ -11,12 +12,17 @@ const Quiz = () => {
     setCheckAnswer(true)
     dispatch(countCorrectAnswers());
   }
+  const handlePlayAgain = () => {
+    setCheckAnswer(false);
+    dispatch(getQuestions());
+    dispatch(playAgain());
+  }
   
   return (
     <div className="w-[95%] md:w-[700px] py-5 mx-auto min-h-screen bg-center bg-cover bg-no-repeat">
       <QuizQuestions checkAnswer={checkAnswer} />
       { checkAnswer &&  <ScoreBoard />}
-      <Buttons checkAnswer={checkAnswer} handleCheckAnswer={handleCheckAnswer} />
+      <Buttons checkAnswer={checkAnswer} handleCheckAnswer={handleCheckAnswer} handlePlayAgain={handlePlayAgain} />
     </div>
   )
 }
