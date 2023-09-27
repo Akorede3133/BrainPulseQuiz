@@ -14,7 +14,7 @@ const SingleOption = ({index, id, option, selected, correct_answer, checkAnswer}
     <li key={index} >
       <button 
         className={`
-        ${!checkAnswer && selected === decodedOption && 'bg-pink-400'}
+        ${!checkAnswer && selected === decodedOption && 'bg-pink-600'}
         ${checkAnswer && selected === decodedOption && 'bg-red-600'}
         ${decodedCorrrectAnswer === decodedOption && 'bg-green-600 border-green-600'} 
         ${selected === decodedOption && selected === decodedCorrrectAnswer && 'bg-green-600 border-green-600'}
