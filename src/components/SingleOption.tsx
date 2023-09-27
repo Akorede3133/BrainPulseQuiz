@@ -15,8 +15,8 @@ const SingleOption = ({index, id, option, selected, correct_answer}: SingleOptio
       <button 
         className={`
         ${selected === decodedOption && 'bg-pink-500'}
-        ${decodedCorrrectAnswer === decodedOption && 'bg-green-500'} 
-        ${selected === decodedOption && selected === decodedCorrrectAnswer && 'bg-green-400'} 
+        ${decodedCorrrectAnswer === decodedOption && 'bg-green-300 border-green-300'} 
+        ${selected === decodedOption && selected === decodedCorrrectAnswer && 'bg-green-300 border-green-300'} 
         text-sm cursor-pointer 
         hover:bg-pink-600 
         border 
