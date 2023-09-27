@@ -6,6 +6,13 @@ export interface QuestionProp {
   incorrect_answers: string[];
   selected: string
 }
+export interface SingleOptionProp {
+  index: number;
+  id: string;
+  option: string;
+  selected: string;
+  correct_answer: string;
+}
 export interface InitialStateProp {
   questions: QuestionProp[];
   correctCount: number;
