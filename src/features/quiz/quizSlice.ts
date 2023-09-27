@@ -4,7 +4,7 @@ import { InitialStateProp, QuizResponseProp } from "../../types";
 const initialState: InitialStateProp = {
   questions: [],
   correctCount: 0,
-  questionsWithId: [],
+  disableCheckBtn: true,
   loading: true,
   error: '',
 };
@@ -42,6 +42,10 @@ export const quizeSlice = createSlice({
     },
     playAgain: (state) => {
       state.correctCount = 0;
+    },
+    handleDisableCheckBtn: (state) => {
+      const condition = state.questions.every((question) => question.selected)
+      state.disableCheckBtn = condition ? false : true;
     }
   },
   extraReducers: (builder) => {
@@ -65,5 +69,5 @@ export const quizeSlice = createSlice({
       })
   }
 })
-export const { selectAnswer, countCorrectAnswers, playAgain } = quizeSlice.actions;
+export const { selectAnswer, countCorrectAnswers, playAgain, handleDisableCheckBtn } = quizeSlice.actions;
 export default quizeSlice.reducer

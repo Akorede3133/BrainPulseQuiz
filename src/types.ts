@@ -12,11 +12,12 @@ export interface SingleOptionProp {
   option: string;
   selected: string;
   correct_answer: string;
+  checkAnswer: boolean;
 }
 export interface InitialStateProp {
   questions: QuestionProp[];
+  disableCheckBtn: boolean;
   correctCount: number;
-  questionsWithId:  QuestionProp[];
   loading: boolean;
   error: string | undefined;
 }
