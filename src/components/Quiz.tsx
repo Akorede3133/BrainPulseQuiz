@@ -25,7 +25,7 @@ const Quiz = () => {
         {
           questions.map((quest) => {
             const {question, options, id, selected, correct_answer } = quest;
-            
+            const decodedCorrrectAnswer = decodeHtmlEntities(correct_answer);            
             return (
               <li key={id} className=" border-b border-b-pink-700 pb-5">
                 <p className=" pb-4 text-2xl">{decodeHtmlEntities(question)}</p>
@@ -33,11 +33,11 @@ const Quiz = () => {
                   {
                     checkAnswer ?
                     options.map((option, index) => {
-                      const decodedOption = decodeHtmlEntities(option);
+                      const decodedOption = decodeHtmlEntities(option);                      
                       if (decodedOption) {
                         return (
-                          <li key={index} onClick={()=> dispatch(() => handleChoseOption(id, decodedOption))}>
-                            <button className={`${correct_answer === option && 'bg-green-500'} ${selected === option && 'bg-pink-500'} text-sm cursor-pointer hover:bg-pink-600 border hover:border-0 border-pink-700 rounded-md px-4 py-1`}>{decodedOption}</button>
+                          <li key={index}>
+                            <button className={` ${decodedCorrrectAnswer === decodedOption && 'bg-green-500'} ${selected === decodedOption && selected !== decodedCorrrectAnswer && 'bg-red-400'} text-sm cursor-pointer hover:bg-pink-600 border hover:border-0 border-pink-700 rounded-md px-4 py-1`}>{decodedOption}</button>
                           </li>
                         )
                       }
@@ -49,7 +49,7 @@ const Quiz = () => {
                       if (decodedOption) {
                         return (
                           <li key={index} onClick={()=> dispatch(() => handleChoseOption(id, decodedOption))}>
-                            <button className={`${selected === option && 'bg-pink-500'} text-sm cursor-pointer hover:bg-pink-600 border hover:border-0 border-pink-700 rounded-md px-4 py-1`}>{decodedOption}</button>
+                            <button className={`${selected === decodedOption && 'bg-pink-500'} text-sm cursor-pointer hover:bg-pink-600 border hover:border-0 border-pink-700 rounded-md px-4 py-1`}>{decodedOption}</button>
                           </li>
                         )
                       }
