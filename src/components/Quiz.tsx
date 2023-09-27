@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useAppDispatch } from '../app/hook';
+import { useAppDispatch, useAppSelector } from '../app/hook';
 import { getQuestions } from '../features/quiz/quizSlice';
 import { countCorrectAnswers, playAgain } from '../features/quiz/quizSlice';
 import QuizQuestions from './QuizQuestions';
 import ScoreBoard from './ScoreBoard';
 import Buttons from './Buttons';
+import Loading from './Loading';
 const Quiz = () => {  
   const [checkAnswer, setCheckAnswer] = useState<boolean>(false)
   const dispatch = useAppDispatch();

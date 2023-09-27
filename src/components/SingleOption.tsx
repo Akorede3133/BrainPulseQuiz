@@ -9,9 +9,7 @@ const SingleOption = ({index, id, option, selected, correct_answer, checkAnswer}
     dispatch(handleDisableCheckBtn());
   }
   const decodedOption = decodeHtmlEntities(option);
-  const decodedCorrrectAnswer = decodeHtmlEntities(correct_answer)                      
-  console.log(checkAnswer);
-  
+  const decodedCorrrectAnswer = decodeHtmlEntities(correct_answer)                        
   return (
     <li key={index} >
       <button 
