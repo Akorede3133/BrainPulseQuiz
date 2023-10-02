@@ -6,7 +6,9 @@ import QuizQuestions from './QuizQuestions';
 import ScoreBoard from './ScoreBoard';
 import Buttons from './Buttons';
 import Loading from './Loading';
+import Error from './Error';
 const Quiz = () => {  
+  const { loading, error } = useAppSelector((state) => state.quiz);
   const [checkAnswer, setCheckAnswer] = useState<boolean>(false)
   const dispatch = useAppDispatch();
   const handleCheckAnswer = () => {
@@ -17,6 +19,13 @@ const Quiz = () => {
     setCheckAnswer(false);
     dispatch(getQuestions());
     dispatch(playAgain());
+  }
+
+  if (loading) {
+    return <Loading />
+  }
+  if (error) {
+    return <Error />
   }
   
   return (
