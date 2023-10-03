@@ -10,7 +10,7 @@ const initialState: InitialStateProp = {
 };
 
 export const getQuestions = createAsyncThunk('quiz/getQuestions', async () => {
-  const url ='https://opentdb.com/api.php?amount=3&category=9&type=multiple';
+  const url ='https://opentdb.com/api.php?amount=10&category=9&type=multiple';
   try {
     const response = await fetch(url);
     const data = await response.json();

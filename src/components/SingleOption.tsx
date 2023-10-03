@@ -2,20 +2,20 @@ import { selectAnswer, handleDisableCheckBtn } from '../features/quiz/quizSlice'
 import { useAppDispatch } from "../app/hook";
 import { decodeHtmlEntities } from '../utils/decoder';
 import { SingleOptionProp } from '../types';
-const SingleOption = ({index, id, option, selected, correct_answer, checkAnswer}: SingleOptionProp) => {
+const SingleOption = ({id, option, selected, correct_answer, checkAnswer}: SingleOptionProp) => {
   const dispatch = useAppDispatch();
   const handleChoseOption = (id: string, value: string) => {    
     dispatch(selectAnswer({id, value}));
     dispatch(handleDisableCheckBtn());
   }
   const decodedOption = decodeHtmlEntities(option);
-  const decodedCorrrectAnswer = decodeHtmlEntities(correct_answer)                        
+  const decodedCorrrectAnswer = decodeHtmlEntities(correct_answer)                          
   return (
-    <li key={index} >
+    <li key={id} >
       <button 
         className={`
         ${!checkAnswer && selected === decodedOption && 'bg-pink-600'}
-        ${checkAnswer && selected === decodedOption && 'bg-red-600'}
+        ${checkAnswer && selected === decodedOption && selected !== decodedCorrrectAnswer && 'bg-red-600'}
         ${decodedCorrrectAnswer === decodedOption && 'bg-green-600 border-green-600'} 
         ${selected === decodedOption && selected === decodedCorrrectAnswer && 'bg-green-600 border-green-600'}
         ${checkAnswer && 'pointer-events-none'} 

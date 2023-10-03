@@ -15,9 +15,9 @@ const QuizQuestions = ({ checkAnswer }: {checkAnswer: boolean}) => {
                 <ul className=" flex flex-wrap gap-4">
                   {
                     checkAnswer ?
-                    options.map((option, index) => <SingleOption index={index} id={id} option={option} selected={selected} correct_answer={correct_answer} checkAnswer={checkAnswer} />)
+                    options.map((option, index) => <SingleOption key={index} index={index} id={id} option={option} selected={selected} correct_answer={correct_answer} checkAnswer={checkAnswer} />)
                     :
-                    options.map((option, index) => <SingleOption index={index} id={id} option={option} selected={selected} correct_answer='' checkAnswer={checkAnswer} />) 
+                    options.map((option, index) => <SingleOption key={index} index={index} id={id} option={option} selected={selected} correct_answer='' checkAnswer={checkAnswer} />) 
                   }
                 </ul>
               </li>

@@ -20,7 +20,7 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <div className=" bg-gradient-to-r from-purple-900 to-pink-900">
+    <div className=" bg-gradient-to-r from-purple-900 to-pink-900 min-h-screen">
     <RouterProvider router={router} />
     </div>
   )

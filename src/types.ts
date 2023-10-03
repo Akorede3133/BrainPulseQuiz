@@ -7,7 +7,6 @@ export interface QuestionProp {
   selected: string
 }
 export interface SingleOptionProp {
-  index: number;
   id: string;
   option: string;
   selected: string;
