@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
 import { useAppSelector } from "../app/hook";
 
 const Buttons = ({checkAnswer, handleCheckAnswer, handlePlayAgain }: {checkAnswer: boolean, handleCheckAnswer: () => void, handlePlayAgain: () => void }) => {
   const {disableCheckBtn } = useAppSelector((state) => state.quiz);
   return (
     <div className="flex justify-center mt-10">
-      { checkAnswer ? <button 
+      { checkAnswer ? <Link to='/'>
+        <button 
         className='bg-pink-500 
         px-8 py-2 rounded-md
         text-white hover:bg-transparent 
@@ -14,6 +16,7 @@ const Buttons = ({checkAnswer, handleCheckAnswer, handlePlayAgain }: {checkAnswe
        >
         play again?
        </button>
+      </Link>
       :  <button
           className={`bg-pink-500 
           px-8 py-2 rounded-md

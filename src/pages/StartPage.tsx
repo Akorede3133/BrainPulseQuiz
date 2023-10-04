@@ -61,12 +61,13 @@ const StartPage = () => {
       </form>
       <Link to='quiz' 
       className="self-center justify-center mt-12"
-      onClick={()=> dispatch(getQuestions(params))}
       >
         <button type="button" 
         className="px-10 py-3 rounded-md text-white 
         capitalize bg-pink-600 hover:bg-transparent hover:border 
-        border-pink-600 transition-all">Start quiz</button>
+        border-pink-600 transition-all"
+        onClick={() => dispatch(getQuestions(params))}
+        >Start quiz</button>
       </Link>
     </section>
   )

@@ -9,7 +9,7 @@ const initialState: InitialStateProp = {
   error: '',
 };
 
-export const getQuestions = createAsyncThunk('quiz/getQuestions', async (params: paramsProp) => {
+export const getQuestions = createAsyncThunk('quiz/getQuestions', async (params: paramsProp) => {  
   const {category, difficulty, type} = params  
   const url =`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=${type}`;
   try {
@@ -57,14 +57,13 @@ export const quizeSlice = createSlice({
       })
       .addCase(getQuestions.fulfilled, (state, action: PayloadAction<QuizResponseProp>) => {
         state.loading = false;
+        // state.error = ''
         const { results } = action.payload;
         const questionsWithId = results.map((quest) => {
           const { correct_answer, incorrect_answers, question } = quest
           const options = [correct_answer, ...incorrect_answers].sort(() => Math.random() - 0.5)
           return {id: nanoid(), question, correct_answer, incorrect_answers, options, selected: ''}
-        })
-        console.log(questionsWithId);
-        
+        })        
         state.questions = questionsWithId;
       })
       .addCase(getQuestions.rejected, (state, action) => {

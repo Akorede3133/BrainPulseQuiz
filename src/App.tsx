@@ -4,8 +4,8 @@ import StartPage from './pages/StartPage';
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route>
-    <Route path='/' element={<StartPage />} />
-    <Route path='/quiz' element={<Quiz />} />
+    <Route index path='/' element={<StartPage />} />
+    <Route path='quiz' element={<Quiz />} />
   </Route>
 ))
 const App = () => {

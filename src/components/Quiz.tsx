@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hook';
-import { getQuestions } from '../features/quiz/quizSlice';
 import { countCorrectAnswers, playAgain } from '../features/quiz/quizSlice';
 import QuizQuestions from './QuizQuestions';
 import ScoreBoard from './ScoreBoard';
@@ -17,14 +16,13 @@ const Quiz = () => {
   }
   const handlePlayAgain = () => {
     setCheckAnswer(false);
-    dispatch(getQuestions());
     dispatch(playAgain());
   }
 
   if (loading) {
     return <Loading />
   }
-  if (error) {
+  if (error) {    
     return <Error />
   }
   
