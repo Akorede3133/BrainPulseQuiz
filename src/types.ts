@@ -24,3 +24,8 @@ export interface QuizResponseProp {
   response_code: number;
   results: QuestionProp[];
 }
+export interface paramsProp {
+  category: string;
+  difficulty: string;
+  type: string;
+}

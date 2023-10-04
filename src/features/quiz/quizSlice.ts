@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { InitialStateProp, QuizResponseProp } from "../../types";
+import { InitialStateProp, QuizResponseProp, paramsProp } from "../../types";
 const initialState: InitialStateProp = {
   questions: [],
   correctCount: 0,
@@ -9,8 +9,9 @@ const initialState: InitialStateProp = {
   error: '',
 };
 
-export const getQuestions = createAsyncThunk('quiz/getQuestions', async () => {
-  const url ='https://opentdb.com/api.php?amount=10&category=9&type=multiple';
+export const getQuestions = createAsyncThunk('quiz/getQuestions', async (params: paramsProp) => {
+  const {category, difficulty, type} = params  
+  const url =`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=${type}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -62,6 +63,8 @@ export const quizeSlice = createSlice({
           const options = [correct_answer, ...incorrect_answers].sort(() => Math.random() - 0.5)
           return {id: nanoid(), question, correct_answer, incorrect_answers, options, selected: ''}
         })
+        console.log(questionsWithId);
+        
         state.questions = questionsWithId;
       })
       .addCase(getQuestions.rejected, (state, action) => {
